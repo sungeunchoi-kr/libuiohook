@@ -1,0 +1,21 @@
+# How to Build on Windows
+
+Install cmake for Windows.
+
+md build
+cd build
+
+Now, run:
+cmake -S .. -D BUILD_SHARED_LIBS=OFF -D BUILD_DEMO=ON -DCMAKE_INSTALL_PREFIX=../dist --debug-find
+-- Note that BUILD_SHARED_LIBS=OFF. This builds the static library.
+
+The `--debug-find` option should tell you what directories camke is looking
+for if it doesn't find one of the resources it requires.
+For our case, it was "advapi32.lib".
+
+Download "advapi32.lib" from "https://github.com/nyx0/Pony/blob/master/source/masm32/lib/advapi32.lib"
+and put it in one of the directores cmake searches for.
+
+After the configure stage, run `cmake --build . --parallel 2 --target install`.
+
+The uiohook.lib is output to `\dist\lib`.
